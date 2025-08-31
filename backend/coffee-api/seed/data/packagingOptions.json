@@ -1,0 +1,14 @@
+[
+  { "size": "12oz", "type": "retail", "material": "foil-lined bag with valve" },
+  {
+    "size": "2lb",
+    "type": "retail/wholesale",
+    "material": "foil-lined bag with valve"
+  },
+  {
+    "size": "5lb",
+    "type": "wholesale",
+    "material": "foil-lined bag with valve"
+  },
+  { "size": "10lb", "type": "wholesale", "material": "bulk bag" }
+]

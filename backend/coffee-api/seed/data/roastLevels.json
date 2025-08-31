@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Light",
+    "description": "Light brown, dry surface, highlights origin characteristics"
+  },
+  {
+    "id": 2,
+    "name": "Medium",
+    "description": "Medium brown, balanced flavor and acidity"
+  },
+  {
+    "id": 3,
+    "name": "Medium-Dark",
+    "description": "Rich dark color, some oil on surface, bittersweet notes"
+  },
+  {
+    "id": 4,
+    "name": "Dark",
+    "description": "Shiny black, oily surface, pronounced bitterness"
+  }
+]
