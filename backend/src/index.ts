@@ -4,7 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 
 // Import routes
-import productRoutes from "./routes/products";
+import productRoutes from "./routes/products.js";
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(express.json());
 
 // DB connection
 mongoose
-  .connect(process.env.MONGO_URI!)
+  .connect(process.env.MONGO_URI as string)
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
