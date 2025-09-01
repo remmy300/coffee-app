@@ -8,14 +8,14 @@ type ApiResponse<T> = {
 };
 
 export const fetchProducts = async (): Promise<CoffeeProduct[]> => {
-  const res = await fetch(`${API_URL}/products`);
+  const res = await fetch(`${API_URL}/api/products`);
   if (!res.ok) throw new Error("Failed to fetch products");
   const json: ApiResponse<CoffeeProduct[]> = await res.json();
   return json.data;
 };
 
 export const fetchProductById = async (id: string): Promise<CoffeeProduct> => {
-  const res = await fetch(`${API_URL}/products/${id}`);
+  const res = await fetch(`${API_URL}/api/products/${id}`);
   if (!res.ok) throw new Error("Failed to fetch product");
   const json: ApiResponse<CoffeeProduct> = await res.json();
   return json.data;
