@@ -1,10 +1,10 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { Product } from "../models/Products.js";
 
 const router = express.Router();
 
 // GET all products
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const products = await Product.find();
     res.json({ status: "ok", data: products });
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET product by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response) => {
   try {
     const product = await Product.findOne({ id: req.params.id });
     if (!product) {
