@@ -13,8 +13,25 @@ console.log(
   process.env.PAYPAL_CLIENT_SECRET
 );
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://coffee-app-nu-ten.vercel.app",
+];
+
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
