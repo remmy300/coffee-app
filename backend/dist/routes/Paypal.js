@@ -1,8 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
+import client from "../config/PaypalClient.js";
 import express from "express";
 import { ApiError, CheckoutPaymentIntent, OrdersController, } from "@paypal/paypal-server-sdk";
-import client from "../config/PaypalClient.js";
 const router = express.Router();
 const ordersController = new OrdersController(client);
+console.log("PayPal Client ID from Paypal route:", process.env.PAYPAL_CLIENT_ID);
+console.log("PayPal Secret from Paypal route:", process.env.PAYPAL_CLIENT_SECRET);
 // Create PayPal order
 router.post("/create-order", async (req, res) => {
     try {
@@ -30,7 +34,6 @@ router.post("/create-order", async (req, res) => {
         const { result } = await ordersController.createOrder(collect);
         res.json({ orderID: result.id });
         console.log("PayPal order created successfully:", result.id);
-        res.json({ orderID: result.id });
     }
     catch (error) {
         console.error("create-order error", error);

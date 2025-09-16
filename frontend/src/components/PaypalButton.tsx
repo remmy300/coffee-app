@@ -39,6 +39,11 @@ export default function PayPalButton({
           try {
             console.log("Sending create-order request with total:", total);
 
+            console.log(
+              "Frontend PayPal Client ID:",
+              import.meta.env.VITE_PAYPAL_CLIENT_ID
+            );
+
             const res = await fetch(`${API_URL}/api/orders/create-order`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -75,7 +80,7 @@ export default function PayPalButton({
             const captureData = await res.json();
             console.log("Capture-order response:", captureData);
 
-            alert("Payment successful! 🎉");
+            alert("Payment successful!");
           } catch (err) {
             console.error("captureOrder failed:", err);
             alert("Payment failed");
