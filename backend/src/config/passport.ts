@@ -18,7 +18,6 @@ passport.use(
 
         console.log("Creating new user...");
 
-        // First user becomes admin
         const isFirstUser = (await User.countDocuments({})) === 0;
         user = await User.create({
           name: profile.displayName,
