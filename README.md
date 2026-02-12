@@ -119,7 +119,3 @@ Handling infrastructure constraints such as cold starts
 Improving perceived performance through frontend UX patterns
 
 Communicating technical trade-offs clearly
-
-Issue: On Windows, port 5000 was reserved by the system, causing the backend to return 403 Forbidden and frontend requests to fail with CORS errors.
-
-Solution: Changed the backend to run on a free port (8080) and updated the frontend API URL accordingly. Restarting both servers fixed the issue.
