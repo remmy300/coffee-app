@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import CoffeeCard from "@/components/CoffeeCard";
+import Spinner from "@/components/ui/spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
@@ -25,7 +26,12 @@ const Home = () => {
     },
   });
 
-  if (isLoading) return <p>Loading coffee data</p>;
+  if (isLoading)
+    return (
+      <p>
+        <Spinner />
+      </p>
+    );
 
   // Verify uniqueness in development
   if (process.env.NODE_ENV === "development") {

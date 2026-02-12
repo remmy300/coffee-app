@@ -1,69 +1,125 @@
-# React + TypeScript + Vite
+☕ Coffee Browsing & Ordering Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN application that allows users to browse specialty coffee products, view detailed product information, and place orders using secure online payments.
 
-Currently, two official plugins are available:
+📌 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project simulates a real-world coffee e-commerce platform, focusing on clean API design, realistic product data modeling, and end-to-end transaction workflows. Users can browse curated coffee products, explore detailed attributes (origin, roast level, tasting notes), and complete checkout using PayPal.
 
-## Expanding the ESLint configuration
+The goal of this project was to practice building a production-style full-stack application, including frontend UX, backend APIs, database integration, and third-party payment services.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🛠️ Tech Stack
+Frontend
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+React
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+TypeScript
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Vite
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Tailwind CSS
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Backend
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Node.js
+
+Express.js
+
+MongoDB (MongoDB Atlas)
+
+PayPal Payments API
+
+Hosting
+
+Frontend: Vercel
+
+Backend: Render (free tier)
+
+Database: MongoDB Atlas
+
+✨ Key Features
+
+Browse specialty coffee products with rich metadata (origin, roast level, tasting notes, brew methods)
+
+View individual product details
+
+Secure checkout using PayPal
+
+Responsive UI optimized for desktop and mobile
+
+Modular, reusable React components
+
+RESTful API design
+
+🧩 Data Modeling
+
+Products are modeled to reflect real specialty coffee catalog data, including:
+
+Origin, region, farm, and altitude
+
+Roast level and processing method
+
+Tasting notes and brew recommendations
+
+Multiple size variants (retail and wholesale)
+
+Inventory tracking and featured products
+
+This structure was designed to resemble data used in real e-commerce or coffee distributor systems rather than simplified demo data.
+
+💳 Payments
+
+PayPal is integrated to handle secure online payments.
+The checkout flow demonstrates:
+
+Client-side order creation
+
+Server-side payment processing
+
+Confirmation of successful transactions
+
+This simulates real-world payment workflows commonly found in production e-commerce systems.
+
+⚡ Performance Notes (Important)
+
+The backend is hosted on Render’s free tier, which introduces cold-start delays when the server has been inactive. As a result:
+
+The first request after inactivity may take up to 30–60 seconds
+
+Subsequent requests are significantly faster
+
+To improve performance and scalability:
+
+API responses were optimized to return only required fields
+
+Pagination support was added to reduce payload size
+
+Frontend loading states were implemented to improve perceived performance
+
+Future improvements could include:
+
+Caching frequently accessed data
+
+Always-on backend hosting
+
+CDN-backed API responses
+
+These trade-offs were intentionally accepted to keep the project within free-tier infrastructure while still demonstrating real-world engineering considerations.
+
+🧠 What I Learned
+
+Designing realistic product schemas for frontend and backend
+
+Building RESTful APIs for e-commerce-style workflows
+
+Integrating third-party payment services (PayPal)
+
+Handling infrastructure constraints such as cold starts
+
+Improving perceived performance through frontend UX patterns
+
+Communicating technical trade-offs clearly
+
+Issue: On Windows, port 5000 was reserved by the system, causing the backend to return 403 Forbidden and frontend requests to fail with CORS errors.
+
+Solution: Changed the backend to run on a free port (8080) and updated the frontend API URL accordingly. Restarting both servers fixed the issue.

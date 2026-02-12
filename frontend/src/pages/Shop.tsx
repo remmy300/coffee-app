@@ -1,6 +1,7 @@
 import { fetchProducts } from "@/utils/apiProducts";
 import CoffeeCard from "@/components/CoffeeCard";
 import { useQuery } from "@tanstack/react-query";
+import Spinner from "@/components/ui/spinner";
 
 const Shop = () => {
   const {
@@ -12,7 +13,12 @@ const Shop = () => {
     queryFn: fetchProducts,
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  if (isLoading)
+    return (
+      <p className="text-center">
+        <Spinner />
+      </p>
+    );
   if (error) return <p>Failed to load products</p>;
 
   return (

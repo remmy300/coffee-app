@@ -13,15 +13,6 @@ import {
 const router = express.Router();
 const ordersController = new OrdersController(client);
 
-console.log(
-  "PayPal Client ID from Paypal route:",
-  process.env.PAYPAL_CLIENT_ID
-);
-console.log(
-  "PayPal Secret from Paypal route:",
-  process.env.PAYPAL_CLIENT_SECRET
-);
-
 // Create PayPal order
 router.post("/create-order", async (req: Request, res: Response) => {
   try {

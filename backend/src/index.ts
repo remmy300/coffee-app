@@ -4,41 +4,57 @@ import { MONGO_URI, PORT } from "./config/config.js";
 import express, { Application, Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import passport from "./config/passport.js";
 
 const app: Application = express();
 
-console.log("ENV check PAYPAL_CLIENT_ID:", process.env.PAYPAL_CLIENT_ID);
-console.log(
-  "ENV check PAYPAL_CLIENT_SECRET:",
-  process.env.PAYPAL_CLIENT_SECRET
-);
-
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://127.0.0.1:3000",
   "https://coffee-app-nu-ten.vercel.app",
 ];
 
 // Middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      if (
+        origin.startsWith("http://localhost") ||
+        origin.startsWith("http://127.0.0.1") ||
+        origin === "https://coffee-app-nu-ten.vercel.app"
+      ) {
+        return callback(null, true);
       }
+
+      callback(new Error("CORS not allowed"));
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  })
+  }),
 );
+
+app.use(passport.initialize());
+
 app.use(express.json());
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  console.log("Incoming request from origin:", req.headers.origin);
+  next();
+});
 
 // Routes
 import productRoutes from "./routes/products.js";
 import ordersRoutes from "./routes/Paypal.js";
+import adminRoutes from "./routes/admin/index.js";
+import orderRoute from "./routes/admin/Orders.js";
 app.use("/api/products", productRoutes);
 app.use("/api/orders", ordersRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/order", orderRoute);
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
