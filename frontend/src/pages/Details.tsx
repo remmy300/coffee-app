@@ -1,4 +1,4 @@
-import { fetchProductById } from "@/utils/apiProducts";
+import { fetchProductById } from "@/services/apiProducts";
 import type { CoffeeProduct } from "@/types";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -226,10 +226,10 @@ const Details = () => {
                   product.roastLevel === "light"
                     ? "bg-amber-300"
                     : product.roastLevel === "medium"
-                    ? "bg-amber-500"
-                    : product.roastLevel === "medium-dark"
-                    ? "bg-amber-700"
-                    : "bg-amber-900"
+                      ? "bg-amber-500"
+                      : product.roastLevel === "medium-dark"
+                        ? "bg-amber-700"
+                        : "bg-amber-900"
                 }`}
               ></span>
               <span className="capitalize font-medium">

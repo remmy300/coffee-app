@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/utils/apiProducts";
+import { fetchProducts } from "@/services/apiProducts";
 import CoffeeCard from "@/components/CoffeeCard";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@/components/ui/spinner";

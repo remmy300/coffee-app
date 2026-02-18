@@ -48,11 +48,11 @@ app.use((req, res, next) => {
 
 // Routes
 import productRoutes from "./routes/products.js";
-import ordersRoutes from "./routes/Paypal.js";
+import paymentRoutes from "./routes/payments.js";
 import adminRoutes from "./routes/admin/index.js";
 import orderRoute from "./routes/admin/Orders.js";
 app.use("/api/products", productRoutes);
-app.use("/api/orders", ordersRoutes);
+app.use("/api/payments", paymentRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/order", orderRoute);
 

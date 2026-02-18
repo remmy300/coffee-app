@@ -4,7 +4,7 @@ import Spinner from "@/components/ui/spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
-import { fetchProducts } from "@/utils/apiProducts";
+import { fetchProducts } from "@/services/apiProducts";
 
 import type { CoffeeProduct } from "@/types";
 

@@ -8,7 +8,7 @@ export const protect: RequestHandler = (
   next: NextFunction,
 ) => {
   const request = req as AuthenticatedRequest;
-  const token = req.cookies.token;
+  const token = req.cookies.accessToken;
 
   if (!token) return res.status(401).json({ message: "Not authorized" });
 

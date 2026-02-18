@@ -1,16 +1,19 @@
 import { Router } from "express";
 import { Order } from "../../models/Orders.js";
 import { adminOnly, protect } from "../../middleware/authMiddleware.js";
-import { Server } from "http";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  const orders = await Order.find({ paymentStatus: String }).populate(
-    "user",
-    "name email",
-  );
-  res.json(orders);
+router.get("/", async (_req, res) => {
+  try {
+    const orders = await Order.find({})
+      .populate("user", "name email")
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 router.get("/:id", protect, adminOnly, async (req, res) => {
@@ -28,10 +31,22 @@ router.get("/:id", protect, adminOnly, async (req, res) => {
 
 router.put("/:id", protect, adminOnly, async (req, res) => {
   try {
-    const { status } = req.body;
+    const { orderStatus } = req.body;
+    const allowedStatuses = [
+      "pending",
+      "processing",
+      "shipped",
+      "delivered",
+      "cancelled",
+    ];
+
+    if (!allowedStatuses.includes(orderStatus)) {
+      return res.status(400).json({ message: "Invalid order status" });
+    }
+
     const order = await Order.findByIdAndUpdate(
       req.params.id,
-      { status },
+      { orderStatus },
       { new: true },
     );
     if (!order) return res.status(404).json({ message: "Order not found" });

@@ -4,6 +4,13 @@ import App from "@/App";
 import Spinner from "@/components/ui/spinner";
 import Cart from "@/pages/Cart";
 
+import Dashboard from "@/pages/admin/dashboard";
+import Login from "@/pages/admin/Login";
+import Orders from "@/pages/admin/Order";
+import Products from "@/pages/admin/products";
+import ProtectedRoute from "@/pages/admin/ProtectedRoute";
+import AdminLayout from "@/pages/admin/AdminLayout";
+
 const Home = React.lazy(() => import("@/pages/Home"));
 const About = React.lazy(() => import("@/pages/About"));
 const Contact = React.lazy(() => import("@/pages/Contact"));
@@ -21,7 +28,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Home)
+          React.createElement(Home),
         ),
       },
       {
@@ -29,7 +36,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Home)
+          React.createElement(Home),
         ),
       },
       {
@@ -37,7 +44,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(About)
+          React.createElement(About),
         ),
       },
       {
@@ -45,7 +52,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Shop)
+          React.createElement(Shop),
         ),
       },
       {
@@ -53,7 +60,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Contact)
+          React.createElement(Contact),
         ),
       },
       {
@@ -61,7 +68,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Details)
+          React.createElement(Details),
         ),
       },
       {
@@ -69,7 +76,7 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Cart)
+          React.createElement(Cart),
         ),
       },
       {
@@ -77,8 +84,30 @@ export const router = createBrowserRouter([
         element: React.createElement(
           Suspense,
           { fallback: React.createElement(Spinner) },
-          React.createElement(Checkout)
+          React.createElement(Checkout),
         ),
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: React.createElement(App),
+    children: [
+      { path: "/admin/login", element: React.createElement(Login) },
+      {
+        path: "/admin",
+        element: React.createElement(ProtectedRoute),
+        children: [
+          {
+            element: React.createElement(AdminLayout),
+            children: [
+              { index: true, element: React.createElement(Dashboard) },
+              { path: "dashboard", element: React.createElement(Dashboard) },
+              { path: "products", element: React.createElement(Products) },
+              { path: "orders", element: React.createElement(Orders) },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -43,6 +43,19 @@ const NavBar = () => {
             />
           </Link>
         ))}
+        <Link
+          to="/admin/login"
+          className="relative pb-1 text-base font-medium text-gray-600 hover:text-amber-700"
+        >
+          Admin
+          <span
+            className="
+                absolute left-0 bottom-0 w-0 h-0.5 bg-amber-700
+                transition-all duration-300 ease-out
+                group-hover:w-full
+              "
+          />
+        </Link>
       </nav>
       <div className="z-[60]">
         <CartModal />
@@ -79,6 +92,12 @@ const NavBar = () => {
                 className="text-gray-700 hover:text-amber-700 w-full py-2 border-b border-gray-100"
               >
                 Contact Us
+              </Link>
+              <Link
+                to="/admin/login"
+                className="relative pb-1 text-base font-medium text-gray-600 hover:text-amber-700"
+              >
+                Admin
               </Link>
             </div>
           </SheetContent>

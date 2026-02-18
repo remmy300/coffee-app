@@ -5,6 +5,7 @@ export interface IUser {
   email: string;
   role: "admin" | "customer";
   googleId?: string;
+  refreshToken: string;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -12,6 +13,7 @@ const UserSchema = new Schema<IUser>({
   email: { type: String, unique: true, required: true, lowercase: true },
   role: { type: String, enum: ["admin", "customer"], default: "customer" },
   googleId: { type: String },
+  refreshToken: { type: String },
 });
 
 export const User = model<IUser>("User", UserSchema);

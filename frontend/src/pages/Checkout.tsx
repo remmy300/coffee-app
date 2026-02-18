@@ -1,12 +1,19 @@
 import { useCartContext } from "@/context/CartContext";
 import { useState, useMemo } from "react";
 import PayPalButton from "@/components/PaypalButton";
+import MpesaButton from "@/components/MpesaButton";
 
 function CheckoutPage() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<"paypal" | "mpesa">(
+    "paypal",
+  );
+  const [message, setMessage] = useState("");
 
-  const { cartItems } = useCartContext();
+  const { cartItems, clearCart } = useCartContext();
 
   // calculate total using useMemo so it recalculates only when cart changes
   const total = useMemo(() => {
@@ -57,6 +64,28 @@ function CheckoutPage() {
           </div>
 
           <div>
+            <label className="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              className="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Phone</label>
+            <input
+              type="tel"
+              className="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="07XXXXXXXX"
+            />
+          </div>
+
+          <div>
             <label className="block text-sm font-medium mb-1">Address</label>
             <textarea
               className="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
@@ -66,13 +95,69 @@ function CheckoutPage() {
             />
           </div>
 
+          <div>
+            <p className="mb-2 text-sm font-medium text-gray-700">
+              Select Payment Method
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 pt-2">
+            <button
+              type="button"
+              className={`rounded-md border px-4 py-2 text-sm font-medium ${
+                paymentMethod === "paypal"
+                  ? "border-blue-600 bg-blue-50 text-blue-700"
+                  : "bg-white text-gray-700"
+              }`}
+              onClick={() => setPaymentMethod("paypal")}
+            >
+              PayPal Method
+            </button>
+            <button
+              type="button"
+              className={`rounded-md border px-4 py-2 text-sm font-medium ${
+                paymentMethod === "mpesa"
+                  ? "border-green-600 bg-green-50 text-green-700"
+                  : "bg-white text-gray-700"
+              }`}
+              onClick={() => setPaymentMethod("mpesa")}
+            >
+              M-Pesa Method
+            </button>
+          </div>
+
+          {message ? (
+            <p className="text-sm text-gray-700 rounded bg-gray-100 px-3 py-2">
+              {message}
+            </p>
+          ) : null}
+
           <div className="mt-3">
-            <PayPalButton
-              total={total}
-              name={name}
-              address={address}
-              cartItems={cartItems}
-            />
+            {paymentMethod === "paypal" ? (
+              <PayPalButton
+                total={total}
+                name={name}
+                email={email}
+                phone={phone}
+                address={address}
+                cartItems={cartItems}
+                onSuccess={() => {
+                  clearCart();
+                  setMessage("Payment successful.");
+                }}
+                onFailure={(error) => setMessage(error)}
+              />
+            ) : (
+              <MpesaButton
+                total={total}
+                name={name}
+                email={email}
+                phone={phone}
+                address={address}
+                cartItems={cartItems}
+                onSuccess={() => setMessage("M-Pesa request sent")}
+                onFailure={(error) => setMessage(error)}
+              />
+            )}
           </div>
         </div>
       </div>

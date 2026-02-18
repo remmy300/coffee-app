@@ -3,8 +3,7 @@ import { adminOnly, protect } from "../../middleware/authMiddleware.js";
 import authRoutes from "../admin/auth.js";
 import productRoutes from "../admin/Products.js";
 import orderRoutes from "../admin/Orders.js";
-
-const app: Application = express();
+import analyticRoutes from "../admin/analytics.js";
 
 const router = Router();
 router.use("/auth", authRoutes);
@@ -13,5 +12,6 @@ router.use(protect, adminOnly);
 
 router.use("/products", productRoutes);
 router.use("/orders", orderRoutes);
+router.use("/analytics", analyticRoutes);
 
 export default router;
