@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { adminApi } from "@/services/adminApi";
-import type { Product } from "../products";
+import type { Product } from "@/types";
 
 interface Props {
   products: Product[];

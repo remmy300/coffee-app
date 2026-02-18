@@ -7,7 +7,7 @@ import Cart from "@/pages/Cart";
 import Dashboard from "@/pages/admin/dashboard";
 import Login from "@/pages/admin/Login";
 import Orders from "@/pages/admin/Order";
-import Products from "@/pages/admin/products";
+import Products from "@/pages/admin/Products";
 import ProtectedRoute from "@/pages/admin/ProtectedRoute";
 import AdminLayout from "@/pages/admin/AdminLayout";
 

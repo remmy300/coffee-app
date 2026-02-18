@@ -3,19 +3,7 @@ import { adminApi } from "@/services/adminApi";
 import { Button } from "@/components/ui/button";
 import ProductTable from "./components/ProductTable";
 import ProductDialog from "./components/ProductDialog";
-
-export interface Product {
-  _id?: string;
-  id?: string;
-  name: string;
-  price: number;
-  type: string;
-  roastLevel: string;
-  description: string;
-  weight: number;
-  inventory: number;
-  roastDate: string;
-}
+import type { Product } from "@/types";
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);

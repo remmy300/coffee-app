@@ -43,3 +43,16 @@ export type Testimonial = {
   content: string;
   date: string;
 };
+
+export interface Product {
+  _id?: string;
+  id?: string;
+  name: string;
+  price: number;
+  type: string;
+  roastLevel: string;
+  description: string;
+  weight: number;
+  inventory: number;
+  roastDate: string;
+}

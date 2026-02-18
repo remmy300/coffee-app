@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import type { Product } from "../products";
+import type { Product } from "@/types";
 
 interface Props {
   open: boolean;
