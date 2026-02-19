@@ -1,7 +1,6 @@
 import type { CoffeeProduct } from "@/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
-console.log("API URL:", API_URL);
 
 type ApiResponse<T> = {
   data: T;
@@ -11,8 +10,10 @@ type ApiResponse<T> = {
 const fetchApiJson = async <T>(url: string): Promise<ApiResponse<T>> => {
   const res = await fetch(url, {
     headers: {
-      "ngrok-skip-browser-warning": "true",
       Accept: "application/json",
+      ...(API_URL?.includes("ngrok")
+        ? { "ngrok-skip-browser-warning": "true" }
+        : {}),
     },
   });
 
@@ -37,6 +38,8 @@ export const fetchProducts = async (): Promise<CoffeeProduct[]> => {
 };
 
 export const fetchProductById = async (id: string): Promise<CoffeeProduct> => {
-  const json = await fetchApiJson<CoffeeProduct>(`${API_URL}/api/products/${id}`);
+  const json = await fetchApiJson<CoffeeProduct>(
+    `${API_URL}/api/products/${id}`,
+  );
   return json.data;
 };

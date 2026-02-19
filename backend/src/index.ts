@@ -12,7 +12,7 @@ const app: Application = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
-  "https://coffee-app-nu-ten.vercel.app",
+  "https://coffee-app-ed1d.vercel.app",
 ];
 
 // Middleware
@@ -24,7 +24,8 @@ app.use(
       if (
         origin.startsWith("http://localhost") ||
         origin.startsWith("http://127.0.0.1") ||
-        origin === "https://coffee-app-nu-ten.vercel.app"
+        origin === "https://coffee-app-ed1d.vercel.app" ||
+        origin.endsWith(".vercel.app")
       ) {
         return callback(null, true);
       }
