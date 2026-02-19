@@ -29,6 +29,8 @@ MongoDB (MongoDB Atlas)
 
 PayPal Payments API
 
+M-Pesa Daraja API
+
 Hosting
 
 Frontend: Vercel
@@ -44,6 +46,8 @@ Browse specialty coffee products with rich metadata (origin, roast level, tastin
 View individual product details
 
 Secure checkout using PayPal
+
+Mobile payment initiation with M-Pesa STK Push
 
 Responsive UI optimized for desktop and mobile
 
@@ -69,16 +73,35 @@ This structure was designed to resemble data used in real e-commerce or coffee d
 
 💳 Payments
 
-PayPal is integrated to handle secure online payments.
-The checkout flow demonstrates:
+The platform includes multi-provider payment integration for secure checkout workflows.
 
-Client-side order creation
+Implemented providers:
 
-Server-side payment processing
+PayPal (web checkout)
 
-Confirmation of successful transactions
+M-Pesa Daraja (mobile checkout)
 
-This simulates real-world payment workflows commonly found in production e-commerce systems.
+Payment flow:
+
+Frontend sends cart/checkout details to backend payment endpoints
+
+Backend validates products and pricing against database records
+
+Backend creates payment requests/orders with external provider APIs
+
+Frontend completes user authorization or payment prompt flow
+
+Backend verifies/captures transactions and returns final payment status
+
+Security and reliability considerations:
+
+Provider credentials are stored in backend environment variables
+
+Payment-sensitive logic runs server-side (no trust in client totals)
+
+Transaction outcomes are validated before confirming successful checkout
+
+This setup mirrors real production payment integration patterns used in modern e-commerce applications.
 
 ⚡ Performance Notes (Important)
 
