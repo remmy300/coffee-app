@@ -17,7 +17,16 @@
     "inventory": 125,
     "roastDate": "2023-11-15",
     "isFeatured": true,
-    "images": ["/img/yirgacheffe-bag.webp", "/img/yirgacheffe-beans.webp"],
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585087/yirgacheffe-bag_qpjrui.webp",
+        "public_id": "yirgacheffe-bag_qpjrui"
+      },
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585290/yirgacheffe-beans_lxrtov.webp",
+        "public_id": "yirgacheffe-beans_lxrtov"
+      }
+    ],
     "certifications": ["Organic", "Fair Trade"],
     "brewMethods": ["Pour Over", "Aeropress", "Chemex"],
     "score": 87.5,
@@ -49,7 +58,16 @@
     "inventory": 89,
     "roastDate": "2023-11-12",
     "isFeatured": false,
-    "images": ["/img/huila-bag.webp", "/img/huila-beans.webp"],
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585313/huila-bag_ipwnx0.webp",
+        "public_id": "huila-bag_ipwnx0"
+      },
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585408/huila-beans_gbvjjb.webp",
+        "public_id": "huila-beans_gbvjjb"
+      }
+    ],
     "certifications": ["Rainforest Alliance"],
     "brewMethods": ["Espresso", "Drip", "French Press"],
     "score": 85,
@@ -80,7 +98,16 @@
     "inventory": 142,
     "roastDate": "2023-11-14",
     "isFeatured": true,
-    "images": ["/img/darkblend-bag.webp", "/img/darkblend-beans.webp"],
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585119/darkblend-bag_wzohua.webp",
+        "public_id": "darkblend-bag_wzohua"
+      },
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771612770/darkblend-beans_tpvhhx.webp",
+        "public_id": "darkblend-beans_tpvhhx"
+      }
+    ],
     "brewMethods": ["Espresso", "Moka Pot", "Cold Brew"],
     "score": 83.5,
     "variants": [
@@ -110,7 +137,16 @@
     "inventory": 67,
     "roastDate": "2023-11-10",
     "isFeatured": false,
-    "images": ["/img/decaf-bag.webp", "/img/decaf-beans.webp"],
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585336/decaf-bag_jdkqjb.webp",
+        "public_id": "decaf-bag_jdkqjb"
+      },
+      {
+        "url": "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585385/decaf-beans_ikfxzj.webp",
+        "public_id": "decaf-beans_ikfxzj"
+      }
+    ],
     "certifications": ["Organic", "Swiss Water Process"],
     "brewMethods": ["Drip", "French Press", "Espresso"],
     "variants": [

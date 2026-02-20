@@ -27,7 +27,7 @@ export interface ProductDocument extends Document {
   inventory: number;
   roastDate: string;
   isFeatured: boolean;
-  images: string[];
+  images: [{ url: string; public_id: string }];
   certifications?: string[];
   brewMethods?: string[];
   score?: number;
@@ -63,17 +63,22 @@ const productSchema = new Schema<ProductDocument>(
     inventory: { type: Number, required: true },
     roastDate: { type: String, required: true },
     isFeatured: { type: Boolean, default: false },
-    images: [String],
+    images: [
+      {
+        url: { type: String, required: true },
+        public_id: { type: String, required: true },
+      },
+    ],
     certifications: [String],
     brewMethods: [String],
     score: Number,
     variants: [variantSchema],
     popularWith: [String],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export const Product = mongoose.model<ProductDocument>(
   "Product",
-  productSchema
+  productSchema,
 );

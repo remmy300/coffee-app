@@ -50,7 +50,7 @@ const Home = () => {
         <div className="py-16 px-6 max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-center">
           <div className="md:w-1/2 shadow rounded-lg overflow-hidden">
             <img
-              src="/img/grinder.webp"
+              src="https://res.cloudinary.com/dmsicle2b/image/upload/v1771585363/grinder_yetkud.webp"
               alt="Coffee roasting process"
               loading="lazy"
               className="w-full h-auto object-cover"

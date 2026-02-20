@@ -18,7 +18,10 @@ const fetchApiJson = async <T>(url: string): Promise<ApiResponse<T>> => {
   });
 
   if (!res.ok) {
-    throw new Error(`Request failed with status ${res.status}`);
+    const preview = (await res.text()).slice(0, 240);
+    throw new Error(
+      `Request failed (${res.status}) for ${url}. Response: ${preview}`,
+    );
   }
 
   const contentType = res.headers.get("content-type") || "";
@@ -38,8 +41,9 @@ export const fetchProducts = async (): Promise<CoffeeProduct[]> => {
 };
 
 export const fetchProductById = async (id: string): Promise<CoffeeProduct> => {
+  const encodedId = encodeURIComponent(id);
   const json = await fetchApiJson<CoffeeProduct>(
-    `${API_URL}/api/products/${id}`,
+    `${API_URL}/api/products/${encodedId}`,
   );
   return json.data;
 };

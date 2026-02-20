@@ -25,7 +25,12 @@ const productSchema = new Schema({
     inventory: { type: Number, required: true },
     roastDate: { type: String, required: true },
     isFeatured: { type: Boolean, default: false },
-    images: [String],
+    images: [
+        {
+            url: { type: String, required: true },
+            public_id: { type: String, required: true },
+        },
+    ],
     certifications: [String],
     brewMethods: [String],
     score: Number,

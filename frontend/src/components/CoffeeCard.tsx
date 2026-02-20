@@ -10,12 +10,13 @@ interface CoffeeCardProps {
 const CoffeeCard = ({ product }: CoffeeCardProps) => {
   const navigate = useNavigate();
   const { addToCart } = useCartContext();
+  const productIdentifier = product._id ?? product.id;
 
   return (
     <div className="group relative border border-gray-200 rounded-xl  shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 bg-white">
       <div className="h-60 overflow-hidden">
         <img
-          src={product.images[0]}
+          src={product.images[0]?.url}
           alt={product.name}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -48,10 +49,10 @@ const CoffeeCard = ({ product }: CoffeeCardProps) => {
                 product.roastLevel === "light"
                   ? "bg-amber-300"
                   : product.roastLevel === "medium"
-                  ? "bg-amber-500"
-                  : product.roastLevel === "medium-dark"
-                  ? "bg-amber-700"
-                  : "bg-amber-900"
+                    ? "bg-amber-500"
+                    : product.roastLevel === "medium-dark"
+                      ? "bg-amber-700"
+                      : "bg-amber-900"
               }`}
             ></span>
             <span className="ml-1 text-sm font-medium text-gray-600 capitalize">
@@ -84,7 +85,7 @@ const CoffeeCard = ({ product }: CoffeeCardProps) => {
             Add To Cart
           </Button>
           <Button
-            onClick={() => navigate(`/details/${product.id}`)}
+            onClick={() => navigate(`/details/${productIdentifier}`)}
             className=" bg-amber-600 hover:bg-amber-700 text-white py-2.5 rounded-lg font-medium transition-colors duration-300 flex items-center justify-center gap-2"
           >
             <span>View Details</span>

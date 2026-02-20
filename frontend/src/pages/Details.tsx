@@ -83,11 +83,11 @@ const Details = () => {
         </h1>
         <div className="flex items-center gap-4">
           <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(5)].map((_, id) => (
               <Star
-                key={i}
+                key={id}
                 className={`w-5 h-5 ${
-                  i < Math.floor((product.score ?? 0) / 20)
+                  id < Math.floor((product.score ?? 0) / 20)
                     ? "fill-amber-400 stroke-amber-400"
                     : "stroke-gray-300"
                 }`}
@@ -108,7 +108,7 @@ const Details = () => {
         <div className="space-y-4">
           <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-50">
             <img
-              src={product.images[0]}
+              src={product.images[0]?.url}
               alt={product.name}
               loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
@@ -121,15 +121,15 @@ const Details = () => {
             </button>
           </div>
           <div className="grid grid-cols-4 gap-2">
-            {product.images.slice(0, 4).map((image, index) => (
+            {product.images.slice(0, 4).map((image, id) => (
               <div
-                key={index}
+                key={id}
                 className="aspect-square bg-gray-50 rounded-md overflow-hidden cursor-pointer"
               >
                 <img
-                  src={image}
+                  src={product.images[0]?.url}
                   loading="lazy"
-                  alt={`${product.name} ${index + 1}`}
+                  alt={product.name}
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -1,4 +1,5 @@
 export type CoffeeProduct = {
+  _id?: string;
   id: string;
   name: string;
   quantity: number;
@@ -17,7 +18,7 @@ export type CoffeeProduct = {
   inventory: number;
   roastDate: string;
   isFeatured: boolean;
-  images: string[];
+  images: [{ url: string; public_id: string }];
   certifications?: string[];
   brewMethods?: string[];
   score?: number;
@@ -50,6 +51,7 @@ export interface Product {
   name: string;
   price: number;
   type: string;
+  images: [{ url: string; public_id: string }];
   roastLevel: string;
   description: string;
   weight: number;

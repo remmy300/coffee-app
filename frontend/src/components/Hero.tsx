@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative h-screen bg-[url('/img/coffee1.webp')] bg-cover bg-center bg-no-repeat"
+      className="relative h-screen bg-[url('https://res.cloudinary.com/dmsicle2b/image/upload/v1771585152/coffee_1_u89umg.webp')] bg-cover bg-center bg-no-repeat"
     >
       <div className="absolute inset-0 bg-gray-900/60 transition-all duration-500 hover:bg-gray-900/50"></div>
 
@@ -32,12 +32,12 @@ const Hero = () => {
           <div className="flex items-center gap-2">
             <div className="flex -space-x-2">
               <img
-                src="/img/arabica.webp"
+                src="https://res.cloudinary.com/dmsicle2b/image/upload/v1771619199/arabica_vbp4pk.webp"
                 className="w-10 h-10 rounded-full border-2 border-amber-500 object-cover"
                 alt="Arabica coffee"
               />
               <img
-                src="/img/coffee4.webp"
+                src="https://res.cloudinary.com/dmsicle2b/image/upload/v1771585313/huila-bag_ipwnx0.webp"
                 className="w-10 h-10 rounded-full border-2 border-amber-500 object-cover"
                 alt="Coffee beans"
               />

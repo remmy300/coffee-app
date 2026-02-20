@@ -1,6 +1,9 @@
 import express from "express";
 import { Product } from "../../models/Products.js";
 import { adminOnly, protect } from "../../middleware/authMiddleware.js";
+import upload from "../../middleware/upload.js";
+import { uploadBuffer } from "../../utils/uploadToCloudinary.js";
+import cloudinary from "../../config/cloudinary.js";
 const router = express.Router();
 // Protect all routes
 router.use(protect, adminOnly);
@@ -9,7 +12,13 @@ router.get("/", async (req, res) => {
     res.json(products);
 });
 const normalizeProductPayload = (body) => {
-    const requiredText = ["name", "type", "roastLevel", "description", "roastDate"];
+    const requiredText = [
+        "name",
+        "type",
+        "roastLevel",
+        "description",
+        "roastDate",
+    ];
     for (const key of requiredText) {
         if (!body[key] || typeof body[key] !== "string" || !body[key].trim()) {
             throw new Error(`Missing required field: ${key}`);
@@ -59,35 +68,78 @@ const normalizeProductPayload = (body) => {
         wholesalePrice: body.wholesalePrice === undefined || body.wholesalePrice === ""
             ? undefined
             : Number(body.wholesalePrice),
-        score: body.score === undefined || body.score === "" ? undefined : Number(body.score),
+        score: body.score === undefined || body.score === ""
+            ? undefined
+            : Number(body.score),
     };
 };
-router.post("/", async (req, res) => {
+router.post("/", upload.array("images", 5), async (req, res) => {
     try {
         const payload = normalizeProductPayload(req.body);
+        let uploadedImages = [];
+        if (req.files && Array.isArray(req.files)) {
+            for (const file of req.files) {
+                const result = await uploadBuffer(file.buffer, "coffee-app/products");
+                uploadedImages.push({
+                    url: result.secure_url,
+                    public_id: result.public_id,
+                });
+            }
+        }
+        payload.images = uploadedImages;
         const product = await Product.create(payload);
-        console.log("Added product:", product);
         res.status(201).json(product);
     }
     catch (error) {
-        console.log(error.message);
-        res.status(400).json({ message: error.message || "Error adding product" });
+        res.status(400).json({ message: error.message });
     }
 });
-router.put("/:id", async (req, res) => {
+router.put("/:id", upload.array("images", 5), async (req, res) => {
     try {
+        const product = await Product.findById(req.params.id);
+        if (!product)
+            return res.status(404).json({ message: "Not found" });
         const payload = normalizeProductPayload(req.body);
-        const product = await Product.findByIdAndUpdate(req.params.id, payload, {
+        if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+            // Delete old images from Cloudinary
+            if (product.images?.length) {
+                for (const img of product.images) {
+                    if (img.public_id) {
+                        await cloudinary.uploader.destroy(img.public_id);
+                    }
+                }
+            }
+            let uploadedImages = [];
+            for (const file of req.files) {
+                const result = await uploadBuffer(file.buffer, "coffee");
+                uploadedImages.push({
+                    url: result.secure_url,
+                    public_id: result.public_id,
+                });
+            }
+            payload.images = uploadedImages;
+        }
+        const updated = await Product.findByIdAndUpdate(req.params.id, payload, {
             new: true,
         });
-        res.json(product);
+        res.json(updated);
     }
     catch (error) {
-        res.status(400).json({ message: error.message || "Error updating product" });
+        res.status(400).json({ message: error.message });
     }
 });
 router.delete("/:id", async (req, res) => {
-    await Product.findByIdAndDelete(req.params.id);
+    const product = await Product.findById(req.params.id);
+    if (!product)
+        return res.status(404).json({ message: "product not found" });
+    if (product.images?.length) {
+        for (const img of product.images) {
+            if (img.public_id) {
+                await cloudinary.uploader.destroy(img.public_id);
+            }
+        }
+    }
+    await product.deleteOne();
     res.json({ message: "Product deleted" });
 });
 export default router;

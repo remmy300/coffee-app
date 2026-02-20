@@ -16,7 +16,7 @@ const Cart = () => {
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
-    0
+    0,
   );
 
   const delivery = 0;
@@ -52,7 +52,7 @@ const Cart = () => {
             >
               <div className="flex items-center gap-4">
                 <img
-                  src={item.images[0]}
+                  src={item.images[0]?.url}
                   alt={item.name}
                   className="h-20 w-20 object-cover rounded"
                 />

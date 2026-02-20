@@ -32,7 +32,7 @@ const About = () => {
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="lg:w-1/2 h-[500px] rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/img/coffee4.webp"
+                src="https://res.cloudinary.com/dmsicle2b/image/upload/v1771585267/coffee4_pxyhdi.webp"
                 alt="Coffee beans being roasted"
                 className="w-full h-full object-cover"
               />

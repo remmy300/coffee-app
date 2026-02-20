@@ -18,7 +18,10 @@ const coffeeProducts = [
     inventory: 125,
     roastDate: "2023-11-15",
     isFeatured: true,
-    images: ["/img/yirgacheffe-bag.webp", "/img/yirgacheffe-beans.webp"],
+    images: [
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585087/yirgacheffe-bag_qpjrui.webp",
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585290/yirgacheffe-beans_lxrtov.webp",
+    ],
     certifications: ["Organic", "Fair Trade"],
     brewMethods: ["Pour Over", "Aeropress", "Chemex"],
     score: 87.5, // Q-score
@@ -55,7 +58,10 @@ const coffeeProducts = [
     inventory: 89,
     roastDate: "2023-11-12",
     isFeatured: false,
-    images: ["/img/huila-bag.webp", "/img/huila-beans.webp"],
+    images: [
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585313/huila-bag_ipwnx0.webp",
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585408/huila-beans_gbvjjb.webp",
+    ],
     certifications: ["Rainforest Alliance"],
     brewMethods: ["Espresso", "Drip", "French Press"],
     score: 85.0,
@@ -95,7 +101,10 @@ const coffeeProducts = [
     inventory: 142,
     roastDate: "2023-11-14",
     isFeatured: true,
-    images: ["/img/darkblend-bag.webp", "/img/darkblend-beans.webp"],
+    images: [
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585119/darkblend-bag_wzohua.webp",
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771612770/darkblend-beans_tpvhhx.webp",
+    ],
     brewMethods: ["Espresso", "Moka Pot", "Cold Brew"],
     score: 83.5,
     variants: [
@@ -130,7 +139,10 @@ const coffeeProducts = [
     inventory: 67,
     roastDate: "2023-11-10",
     isFeatured: false,
-    images: ["/img/decaf-bag.webp", "/img/decaf-beans.webp"],
+    images: [
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585336/decaf-bag_jdkqjb.webp",
+      "https://res.cloudinary.com/dmsicle2b/image/upload/v1771585385/decaf-beans_ikfxzj.webp",
+    ],
     certifications: ["Organic", "Swiss Water Process"],
     brewMethods: ["Drip", "French Press", "Espresso"],
     variants: [
