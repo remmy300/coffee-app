@@ -25,10 +25,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
             ? {
                 ...item,
                 quantity: (item.quantity ?? 1) + 1,
-                price:
-                  typeof item.price === "number"
-                    ? item.price + product.price
-                    : item.price,
               }
             : item
         )

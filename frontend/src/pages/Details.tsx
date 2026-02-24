@@ -121,9 +121,9 @@ const Details = () => {
             </button>
           </div>
           <div className="grid grid-cols-4 gap-2">
-            {product.images.slice(0, 4).map((image, id) => (
+            {product.images.slice(0, 4).map((image) => (
               <div
-                key={id}
+                key={image.public_id}
                 className="aspect-square bg-gray-50 rounded-md overflow-hidden cursor-pointer"
               >
                 <img

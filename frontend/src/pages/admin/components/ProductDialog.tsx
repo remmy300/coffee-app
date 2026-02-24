@@ -20,7 +20,7 @@ const initialForm: Product = {
   _id: "",
   id: "",
   name: "",
-  images: { url: "", public_id: "" },
+  images: [{ url: "", public_id: "" }],
   price: 0,
   type: "single-origin",
   roastLevel: "medium",

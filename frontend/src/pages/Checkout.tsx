@@ -17,7 +17,10 @@ function CheckoutPage() {
 
   // calculate total using useMemo so it recalculates only when cart changes
   const total = useMemo(() => {
-    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return cartItems.reduce(
+      (sum, item) => sum + item.price * (item.quantity || 1),
+      0,
+    );
   }, [cartItems]);
 
   return (
@@ -38,7 +41,7 @@ function CheckoutPage() {
                 <span>
                   {item.name} (x{item.quantity})
                 </span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
+                <span>${(item.price * (item.quantity || 1)).toFixed(2)}</span>
               </li>
             ))}
           </ul>
