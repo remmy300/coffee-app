@@ -119,14 +119,7 @@ Pagination support was added to reduce payload size
 
 Frontend loading states were implemented to improve perceived performance
 
-To improve performance and scalability:
-
-API responses were optimized to return only required fields
-
-Pagination support was added to reduce payload size
 Redis caching was added for frequently accessed product endpoints
-
-Frontend loading states were implemented to improve perceived performance
 
 These trade-offs were intentionally accepted to keep the project within free-tier infrastructure while still demonstrating real-world engineering considerations.
 
