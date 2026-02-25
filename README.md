@@ -119,13 +119,14 @@ Pagination support was added to reduce payload size
 
 Frontend loading states were implemented to improve perceived performance
 
-Future improvements could include:
+To improve performance and scalability:
 
-Caching frequently accessed data
+API responses were optimized to return only required fields
 
-Always-on backend hosting
+Pagination support was added to reduce payload size
+Redis caching was added for frequently accessed product endpoints
 
-CDN-backed API responses
+Frontend loading states were implemented to improve perceived performance
 
 These trade-offs were intentionally accepted to keep the project within free-tier infrastructure while still demonstrating real-world engineering considerations.
 
@@ -135,10 +136,13 @@ Designing realistic product schemas for frontend and backend
 
 Building RESTful APIs for e-commerce-style workflows
 
-Integrating third-party payment services (PayPal)
+Integrating third-party payment services (PayPal & Mpesa)
 
 Handling infrastructure constraints such as cold starts
 
 Improving perceived performance through frontend UX patterns
 
 Communicating technical trade-offs clearly
+Implementing Redis caching strategies for API performance
+
+Designing caching logic with cache keys
