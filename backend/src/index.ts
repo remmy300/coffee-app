@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import passport from "./config/passport.js";
+import { initRedis } from "./utils/redisClient.js";
 
 const app: Application = express();
 
@@ -15,27 +16,29 @@ const allowedOrigins = [
   "https://coffee-app-ed1d.vercel.app",
 ];
 
+const corsOptions = {
+  origin: (origin: string | undefined, callback: any) => {
+    if (!origin) return callback(null, true);
+
+    if (
+      origin.startsWith("http://localhost") ||
+      origin.startsWith("http://127.0.0.1") ||
+      origin === "https://coffee-app-ed1d.vercel.app" ||
+      origin.endsWith(".vercel.app")
+    ) {
+      return callback(null, true);
+    }
+
+    callback(new Error("CORS not allowed"));
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
 // Middleware
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-
-      if (
-        origin.startsWith("http://localhost") ||
-        origin.startsWith("http://127.0.0.1") ||
-        origin === "https://coffee-app-ed1d.vercel.app" ||
-        origin.endsWith(".vercel.app")
-      ) {
-        return callback(null, true);
-      }
-
-      callback(new Error("CORS not allowed"));
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(passport.initialize());
 
@@ -69,7 +72,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 mongoose
   .connect(MONGO_URI)
-  .then(() => {
+  .then(async () => {
+    await initRedis();
     console.log("MongoDB connected successfully ");
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT} `);

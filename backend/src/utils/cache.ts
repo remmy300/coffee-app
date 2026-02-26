@@ -1,4 +1,4 @@
-import redisClient from "./redisClient.js";
+import redisClient, { isRedisReady } from "./redisClient.js";
 
 export const cacheWrapper = async <T>(
   key: string,
@@ -6,6 +6,10 @@ export const cacheWrapper = async <T>(
   callback: () => Promise<T>,
 ): Promise<T> => {
   try {
+    if (!isRedisReady()) {
+      return callback();
+    }
+
     const cachedData = await redisClient.get(key).catch(() => null);
 
     if (cachedData) {
