@@ -31,7 +31,7 @@ const corsOptions = {
 };
 // Middleware
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 app.use(passport.initialize());
 app.use(express.json());
 app.use(cookieParser());
